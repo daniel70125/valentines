@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>For Keira ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #0f0f14;
+  color: white;
+  overflow: hidden;
+  text-align: center;
+}
+
+.section {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.section.active {
+  display: flex;
+  animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+button {
+  margin-top: 25px;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 30px;
+  background: white;
+  color: black;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+img {
+  width: 70%;
+  max-width: 300px;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+
+#noBtn {
+  position: relative;
+}
+p {
+    color: #FF6F77
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgMusic" loop>
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<div class="section active">
+  <h1>To: My baby/My Headache/Keira…</h1>
+  <p>I made something small for you...</p>
+  <button id="startBtn">Tap to Begin</button>
+</div>
+
+<div class="section">
+    <img src="./k0.jpg" />
+  <p>I know we’ve been off and on… but somehow, I always find my way back to you. We been at this since before 2020 (check the date)
+  </p>
+  <button class="nextBtn">Keep Going ..</button>
+</div>
+
+<div class="section">
+  <img src="./k1.PNG" />
+  <p>I'm never gonna stop fw you, EVER! You really hold a special place in my heart. And i know you dont like 
+    your throwback pictures but I like this one! lol Even the simple nights we was on Facetime meant everything to me.</p>
+  <button class="nextBtn">Next ..</button>
+</div>
+
+<div class="section">
+  <img src="./k2.JPG" />
+  <p>Theres nobody as beautiful as you and you need to know it. From your looks to your brains I love everything about you Ke. You make things feel calm. Easy. Real.</p>
+  <button class="nextBtn">Next ..</button>
+</div>
+
+<div class="section">
+  <img src="./k3.PNG" />
+  <p>You spend your days taking care of everyone else… so let me take care of you this Valentine’s Day.</p>
+  <button class="nextBtn">Next ..</button>
+</div>
+
+<div class="section">
+  <h1>So I’ll keep this simple…</h1>
+  <p>Will you be my Valentine?</p>
+  <div>
+    <button id="yesBtn">Yes ❤️</button>
+    <button id="noBtn">No</button>
+  </div>
+</div>
+
+<div class="section">
+  <h1>Good ❤️</h1>
+  <p>I was already planning our date. And let me know what flowers and candy you like so I can get it lol.  </p>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  let current = 0;
+  const sections = document.querySelectorAll(".section");
+  const music = document.getElementById("bgMusic");
+
+  function showSection(index) {
+    sections.forEach(sec => sec.classList.remove("active"));
+    if (sections[index]) {
+      sections[index].classList.add("active");
+    }
+  }
+
+  function nextSection() {
+    if (current < sections.length - 1) {
+      current++;
+      showSection(current);
+    }
+  }
+
+  document.getElementById("startBtn").addEventListener("click", function() {
+    music.play().catch(() => {});
+    nextSection();
+  });
+
+  document.querySelectorAll(".nextBtn").forEach(btn => {
+    btn.addEventListener("click", nextSection);
+  });
+
+  document.getElementById("yesBtn").addEventListener("click", function() {
+    nextSection();
+    confettiEffect();
+  });
+
+  const noBtn = document.getElementById("noBtn");
+
+  function moveButton() {
+    const x = Math.random() * 150 - 75;
+    const y = Math.random() * 150 - 75;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+  }
+
+  noBtn.addEventListener("mouseover", moveButton);
+  noBtn.addEventListener("touchstart", moveButton);
+
+  function confettiEffect() {
+    for (let i = 0; i < 80; i++) {
+      const confetti = document.createElement("div");
+      confetti.style.position = "fixed";
+      confetti.style.width = "6px";
+      confetti.style.height = "6px";
+      confetti.style.background = "white";
+      confetti.style.top = Math.random() * window.innerHeight + "px";
+      confetti.style.left = Math.random() * window.innerWidth + "px";
+      confetti.style.borderRadius = "50%";
+      document.body.appendChild(confetti);
+    }
+  }
+
+});
+</script>
+
+</body>
+</html>
